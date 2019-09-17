@@ -1,0 +1,10 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "ibraim",
+    "password": "0000",
+    "database": "revotraderts",
+    "entities": ["src/**/*.entity{.ts,.js}"],
+    "synchronize": true
+}

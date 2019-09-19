@@ -11,7 +11,7 @@ export default class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  findOneByUsername(username: string) {
+  findOneByUsername(username: string): Promise<User> {
     return this.userRepository.findOne({
       email: username,
     });

@@ -1,9 +1,14 @@
 const {
-  REVOTRADER_DELETE_DISABLED_USERS
+  REVOTRADER_PRODUCT_PARSE_YML,
+  REVOTRADER_PORT,
 } = process.env;
 
 module.exports = {
+  port: REVOTRADER_PORT || 3000,
+
   cron: {
-    deleteDisabledUsers: REVOTRADER_DELETE_DISABLED_USERS || '* * * * * *'
+    product: {
+      parseYml: REVOTRADER_PRODUCT_PARSE_YML || '0 * * * * *',
+    }
   }
 };

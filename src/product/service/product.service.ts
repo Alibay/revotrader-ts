@@ -12,7 +12,7 @@ export default class ProductService extends NestSchedule {
 
   constructor(
     @InjectRepository(Product)
-    private readonly userRepository: Repository<Product>,
+    private readonly productRepository: Repository<Product>,
   ) {
     super();
   }
@@ -20,7 +20,7 @@ export default class ProductService extends NestSchedule {
   @Cron(config.get('cron.product.parseYml'))
   private async parseYml(): Promise<void> {
     this.logger.debug('parseYml: start');
-    await this.userRepository.find();
+    await this.productRepository.find();
     this.logger.debug('parseYml: finish');
   }
 }

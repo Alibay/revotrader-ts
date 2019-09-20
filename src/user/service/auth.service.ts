@@ -1,17 +1,26 @@
 import UserService from './user.service';
 import { Injectable } from '@nestjs/common';
+import { PasswordEcoder } from '../auth/password-encoder';
 
 @Injectable()
-export default class AuthService {
-  constructor(private readonly userService: UserService) {}
+export class AuthService {
+  constructor(
+    private readonly userService: UserService,
+    private readonly passwordEncoder: PasswordEcoder,
+  ) {}
 
-  async validateUser(username: string, password: string): Promise<any> {
+  async validateUser(username: string, plainPassword: string): Promise<any> {
     const user = await this.userService.findOneByUsername(username);
     if (user) {
-      const { password, ...fields } = user;
-      return fields;
+      return null;
     }
 
-    return null;
+    const verifiedPassword = await this.passwordEncoder.compare(plainPassword, user.password);
+    if (verifiedPassword) {
+      return null;
+    }
+    
+    const { password, ...fields } = user;
+    return fields;
   }
 }
